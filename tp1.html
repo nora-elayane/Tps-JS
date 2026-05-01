@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let TB = [];
+        let B = [];
+        let P = [];
+        let ins = [];
+        let etudiants = [
+            { nom: "Nora", note: 20 },
+            { nom: "Sara", note: 18 },
+            { nom: "Yasmine", note: 15 },
+            { nom: "Amira", note: 12 },
+            { nom: "Salma", note: 10 },
+            { nom: "Asma", note: 8 },
+            { nom: "Mariem", note: 5 },
+            { nom: "Fatma", note: 3 },
+            { nom: "Hela", note: 0 },]
+        for (let etudiant of etudiants) {
+            if (etudiant.note >= 17) {
+                TB.push(etudiant);
+            } else if (etudiant.note >= 14) {
+                B.push(etudiant);
+            } else if (etudiant.note >= 13) {
+                P.push(etudiant);
+            } else if (etudiant.note > 10) {
+                ins.push(etudiant)
+            }
+        }
+        let parent = document.querySelector("body");
+        let h1 = document.createElement("h3");
+        h1.innerHTML = "les etudiants avec mention TB";
+        parent.append(h1);
+        let ul1 = document.createElement("ul");
+        for (let etudiant of TB) {
+            let li = document.createElement("li");
+            li.innerHTML = etudiant.nom;
+            ul1.appendChild(li);
+        }
+        parent.append(ul1);
+        let h2 = document.createElement("h3");
+        h2.innerHTML = "les etudiants avec mention B";
+        parent.append(h2);
+        let ul2 = document.createElement("ul");
+        for (let etudiant of B) {
+            let li = document.createElement("li");
+            li.innerHTML = etudiant.nom;
+            ul2.append(li);
+        }
+        parent.append(ul2);
+        let h3 = document.createElement("h3");
+        h3.innerHTML = "les etudiants avec mention P";
+        parent.append(h3);
+        let ul3 = document.createElement("ul");
+        for (let etudiant of P) {
+            let li = document.createElement("li");
+            li.innerHTML = etudiant.nom;
+            ul3.append(li);
+        }
+        parent.append(ul3);
+        let h4 = document.createElement("h3");
+        h4.innerHTML = "les etudiants avec mention ins";
+        parent.append(h4);
+        let ul4 = document.createElement("ul");
+        for (let etudiant of ins) {
+            let li = document.createElement("li");
+            li.innerHTML = etudiant.nom;
+            ul4.append(li);
+        }
+        parent.append(ul4);
+    </script>
+</body>
+
+
+</html>
