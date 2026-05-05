@@ -1,0 +1,42 @@
+<!-- 
+ TP 3 : Système de Gestion d'Auto-école
+Créez une classe Vehicule (marque, modele, annee).
+Ajoutez une méthode age() qui calcule l'ancienneté.
+Créez une classe Voiture héritant de Vehicule avec une propriété
+carburant .
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Vehicule{
+            constructor(marque, modele , annee){
+                this.marque = marque ;
+                this.modele = modele ;
+                this.annee = annee ;
+            }
+            age() {
+                let dateAc = new  Date().getFullYear() ; 
+                return dateAc - this.annee
+
+            }
+        }
+        class Voiture extends Vehicule{
+            constructor(marque, modele , annee , carburant){
+                super(marque, modele , annee ); 
+                this.carburant = carburant ;
+            }
+        }
+        let v1 = new Vehicule("Audi" , "Q5" , 2018);
+        console.log(v1.age()) ;
+        let v2 = new Voiture("kia" , "picanto" , 2016 , 50 );
+        console.log(v2.age()) ;
+    </script>
+</body>
+</html>
