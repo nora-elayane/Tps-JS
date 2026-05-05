@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let prix =  [45, 12, 100, 34, 8, 55] ; 
+        let total = prix.reduce(function(a , b){return a+=b});
+        console.log(total) ;
+        let sup = prix.filter(a=> a > 30) ;
+        console.log(sup) ; 
+        let avecRemise = prix.map(x => x - (x * 0.1)) ;
+        console.log(avecRemise) ; 
+    </script>
+</body>
+</html>
