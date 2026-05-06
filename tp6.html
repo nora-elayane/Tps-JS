@@ -1,0 +1,49 @@
+<!-- 
+ TP 5 : Contrôle de Saisie
+Créez un formulaire (Nom, Email, Mot de Passe).
+Utilisez e.preventDefault() pour bloquer l'envoi.
+Vérifiez que le mot de passe contient au moins une majuscule et un chiffre
+(Regex ou boucles).
+Affichez un message de succès en vert si tout est valide.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="#" method="post">
+        <input type="text" name="nom" id="nom">
+        <input type="email" name="email" id="email">
+        <input type="password" name="pass" id="pass">
+        <button type="submit">envoyer</button>
+    </form>
+    <script>
+        let form = document.querySelector("form") ; 
+        let rejpass = /^[A-Z]+\d{1}$/ ; 
+        let pass = document.getElementById("pass") ; 
+        form.addEventListener("submit" , function(event){
+                console.log(pass.value) ;
+                if(!rejpass.test(pass.value)){
+                event.preventDefault() 
+            let p = document.createElement("p") ; 
+            p.innerText = "form NON validé"
+            p.style.color = "red" ; 
+            let parent = document.querySelector("body") ; 
+            parent.append(p) ;
+        }else{
+            let p = document.createElement("p") ; 
+            p.innerText = "form validé avec succé !"
+            p.style.color = "green" ; 
+            let parent = document.querySelector("body") ; 
+            parent.append(p) ;
+        }
+                 })
+        
+        
+        
+    </script>
+</body>
+</html>
