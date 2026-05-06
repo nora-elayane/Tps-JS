@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="fl" id="fl">
+    <button onclick="filtrer()">filtrer</button>
+    <button onclick="triCroissant()">tri croissant</button>
+    <button onclick="trideCroissant()">tri decroissant</button>
+
+
+    <script>
+        const stock = [{id:1, nom:"Clavier", prix:250}, {id:2, nom:"Souris",
+        prix:150}];
+        let parent = document.querySelector("body") ;
+
+        function filtrer(){
+        let val = document.querySelector("#fl").value ; 
+           let  fil = stock.filter(( a => a.nom.includes(val)));
+           for(f of fil){
+            let p = document.createElement("p") ; 
+            p.textContent = f.nom ;
+            parent.append(p);
+           }
+        }
+        function triCroissant() {
+            let crois =  stock.sort((a , b)=> a.prix - b.prix)
+            for(f of crois){
+            let p = document.createElement("p") ; 
+            p.textContent = f.nom ;
+            parent.append(p);
+           }
+        }
+        function trideCroissant() {
+            let crois =  stock.sort((a , b)=> b.prix - a.prix)
+            for(f of crois){
+            let p = document.createElement("p") ; 
+            p.textContent = f.nom ;
+            parent.append(p);
+           }
+        }
+
+        let total = stock.reduce(function(a , b){ return a.prix += b.prix} )
+        console.log(total)
+        
+    </script>
+</body>
+</html>
