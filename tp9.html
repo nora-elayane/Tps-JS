@@ -1,0 +1,114 @@
+<!--
+. Architecture & POO (Classes)
+TP 9 : Application de Gestion de Panier
+Simulez une boutique en ligne (ex: Vente de café/dates).
+Classe Produit : propriétés nom , prix , categorie .
+Classe Panier : méthode ajouter() , retirer() , et un getter
+totalHT .
+Affichez le contenu du panier sous forme de liste HTML générée
+dynamiquement.
+
+-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Boutique de Café & Dates</title>
+    <style>
+        body { font-family: sans-serif; display: flex; gap: 50px; padding: 20px; }
+        .boutique, .panier-container { border: 1px solid #ddd; padding: 15px; border-radius: 8px; }
+        .produit-card { margin-bottom: 10px; padding: 10px; background: #f9f9f9; border-radius: 4px; }
+        button { cursor: pointer; background: #2ecc71; border: none; color: white; padding: 5px 10px; border-radius: 3px; }
+        .btn-remove { background: #e74c3c; margin-left: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="boutique">
+        <h2>Catalogue</h2>
+        <div id="catalogue"></div>
+    </div>
+
+    <div class="panier-container">
+        <h2>Mon Panier</h2>
+        <ul id="liste-panier"></ul>
+        <p><strong>Total HT : <span id="total-prix">0</span> DH</strong></p>
+    </div>
+
+    <script>
+        // --- LOGIQUE DES CLASSES ---
+        class Produit {
+            constructor(nom, prix, categorie) {
+                this.nom = nom;
+                this.prix = prix;
+                this.categorie = categorie;
+            }
+        }
+
+        class Panier {
+            constructor() {
+                this.items = [];
+            }
+            ajouter(produit) {
+                this.items.push(produit);
+                renderPanier();
+            }
+            retirer(index) {
+                this.items.splice(index, 1); // Retire l'élément à l'index spécifique
+                renderPanier();
+            }
+            get totalHT() {
+                return this.items.reduce((acc, p) => acc + p.prix, 0);
+            }
+        }
+
+        // --- INSTANCIATION ---
+        const monPanier = new Panier();
+        const stock = [
+            new Produit("Café Arabica", 80, "Boisson"),
+            new Produit("Dates Medjool", 120, "Fruits"),
+            new Produit("Café Robusta", 60, "Boisson"),
+            new Produit("Dates Sukari", 90, "Fruits")
+        ];
+
+        // --- FONCTIONS D'AFFICHAGE ---
+        function renderCatalogue() {
+            const catDiv = document.getElementById("catalogue");
+            stock.forEach((p, index) => {
+                const div = document.createElement("div");
+                div.className = "produit-card";
+                div.innerHTML = `
+                    <strong>${p.nom}</strong> (${p.categorie})<br>
+                    Prix: ${p.prix} DH 
+                    <button onclick="ajouterAuPanier(${index})">Ajouter</button>
+                `;
+                catDiv.appendChild(div);
+            });
+        }
+
+        function renderPanier() {
+            const listeUl = document.getElementById("liste-panier");
+            const totalSpan = document.getElementById("total-prix");
+            
+            listeUl.innerHTML = ""; // Clear
+            
+            monPanier.items.forEach((p, index) => {
+                const li = document.createElement("li");
+                li.innerHTML = `${p.nom} - ${p.prix} DH 
+                                <button class="btn-remove" onclick="monPanier.retirer(${index})">x</button>`;
+                listeUl.appendChild(li);
+            });
+
+            totalSpan.textContent = monPanier.totalHT;
+        }
+
+        // Bridge entre HTML et Instances
+        window.ajouterAuPanier = (index) => {
+            monPanier.ajouter(stock[index]);
+        };
+
+        // Initialisation
+        renderCatalogue();
+    </script>
+</body>
+</html>
