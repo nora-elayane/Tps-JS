@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border>
+        <thead>
+            <th>Nom</th>
+            <th>Note</th>
+            <th>Mention</th>
+        </thead>
+        <tbody id="main">
+
+        </tbody>
+    </table>
+    <script>
+        let etudiants = [
+            {nom:"Nora" ,note: 20} ,
+            {nom:"Ziad" , note:14} ,
+            {nom:"Adam" , note:15} ,
+            {nom:"Hamza" ,note:12} ,
+            {nom:"Ali" , note:7} ] 
+        let tbody = document.getElementById("main") ; 
+        for(let et of etudiants){
+            let mention = "" ; 
+            if(et.note >= 17){
+                 mention = "Très Bien" ;
+            }else if(et.note >= 14 ){
+                 mention = "Bien" ;
+            }else if(et.note >= 10 ){
+                 mention = "Passable" ;
+            }else{
+                 mention = "Insuffisant" ;
+            }
+            let row = document.createElement("tr");
+            row.innerHTML = `<td>${et.nom}</td><td>${et.note}</td><td>${mention}</td>`
+            tbody.append(row) ;
+        }
+        let total = etudiants.reduce( (a , b)=>a + b.note , 0 ) ;
+        let moyenneClass = total /( etudiants.length) ; 
+        console.log(moyenneClass) ;
+        console.log(total) ;
+        console.log(etudiants.length)
+
+    </script>
+</body>
+</html>
