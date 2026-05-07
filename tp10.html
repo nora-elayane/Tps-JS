@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .sombre{
+            background-color:black ; 
+            color : white ; 
+        }
+    </style>
+</head>
+<body>
+    <button id="fond">fond</button>
+    <input type="text" name="text" id="text">
+    <button id="ajout">Ajouter Row</button>
+    <table border>
+        <thead>
+            <th>titre</th>
+        </thead>
+        <tbody id="main">
+
+        </tbody>
+    </table>
+    <script>
+        let bo = document.querySelector("body") ; 
+        let fond = document.getElementById("fond") ;
+        fond.addEventListener("click" , function(){
+            bo.classList.toggle("sombre") ;
+        })
+        let parent = document.getElementById("main") ;
+        let btn = document.getElementById("ajout") ; 
+        btn.addEventListener("click" , function(){
+            let row = document.createElement("tr")  ;
+            let content = document.getElementById("text").value ; 
+            row.innerHTML =`<td>${content}</td>` ;
+            parent.append(row) ; 
+        })
+
+        parent.addEventListener("click" , function (event){
+            event.target.remove() ; 
+        } )
+    </script>
+</body>
+</html>
