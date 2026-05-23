@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Ajouter un Projet : </h1>
+    <label for="code">Code : </label>
+    <input type="text"  id="code"> <br> <br> 
+    <label for="titre">Titre : </label>
+    <input type="text"  id="titre"> <br> <br> 
+    <label for="filiere">Filliére : </label>
+    <input type="text"  id="filiere"> <br> <br> 
+    <button onclick="ajouter()">Ajouter</button>
+    <table border>
+        <thead>
+            <th>code</th>
+            <th>titre</th>
+            <th>filliére</th>
+            <th>Supprimer</th>
+        </thead>
+        <tbody id="tb">
+
+        </tbody>
+    </table>
+    <script>
+        class Projet {
+    constructor(code, titre, filiere) {
+        this.code = code;
+        this.titre = titre;
+        this.filiere = filiere;
+    }
+    toHTML(){
+         let html = `<tr><td>${this.code}</td><td>${this.titre}</td><td>${this.filiere}</td>
+            <td><button onclick='supprimer(this)'>Supprimer</button></td></tr>` ; 
+        return html ;
+            }
+                        }
+    function ajouter(){
+        let code = $("#code").val() ;
+        let titre = $("#titre").val() ;
+        let filiere = $("#filiere").val() ;
+        let p = new Projet(code , titre , filiere) ; 
+        let tbody = $("#tb") ; 
+        tbody.append(p.toHTML());
+
+    }
+    function supprimer(thi){
+            thi.parentElement.parentElement.remove();
+    }
+    let tbody = $("#tb") ; 
+    let xhr = new XMLHttpRequest() ; 
+    xhr.open("get" , "https://jsonplaceholder.typicode.com/users");
+    xhr.send();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            let p= JSON.parse(xhr.responseText)  ; 
+            for(let i = 0 ; i < 10 ; i++ ){
+        let m = new Projet(p[i].id , p[i].name , p[i].address.city) ; 
+        tbody.append(m.toHTML());
+            }
+        }
+    }
+    //ajax avec jquery
+    $.ajax({
+        url : "https://jsonplaceholder.typicode.com/users" , 
+        method : "get" , 
+        success : function(r){
+            for(let i = 0 ; i < 10 ; i++ ){
+            let n = new Projet(r[i].id , r[i].name , r[i].address.city) ; 
+            tbody.append(n.toHTML());
+        }
+
+    }})
+    </script>
+</body>
+</html>
+
+
