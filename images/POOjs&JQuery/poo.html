@@ -52,18 +52,18 @@
             thi.parentElement.parentElement.remove();
     }
     let tbody = $("#tb") ; 
-    let xhr = new XMLHttpRequest() ; 
-    xhr.open("get" , "https://jsonplaceholder.typicode.com/users");
-    xhr.send();
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState == 4 && xhr.status == 200){
-            let p= JSON.parse(xhr.responseText)  ; 
-            for(let i = 0 ; i < 10 ; i++ ){
-        let m = new Projet(p[i].id , p[i].name , p[i].address.city) ; 
-        tbody.append(m.toHTML());
-            }
-        }
-    }
+    // let xhr = new XMLHttpRequest() ; 
+    // xhr.open("get" , "https://jsonplaceholder.typicode.com/users");
+    // xhr.send();
+    // xhr.onreadystatechange = function(){
+    //     if(xhr.readyState == 4 && xhr.status == 200){
+    //         let p= JSON.parse(xhr.responseText)  ; 
+    //         for(let i = 0 ; i < 10 ; i++ ){
+    //     let m = new Projet(p[i].id , p[i].name , p[i].address.city) ; 
+    //     tbody.append(m.toHTML());
+    //         }
+    //     }
+    // }
     //ajax avec jquery
     $.ajax({
         url : "https://jsonplaceholder.typicode.com/users" , 
