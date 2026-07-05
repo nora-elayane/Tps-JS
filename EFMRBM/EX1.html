@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Entreez le nombre de ligne</h3>
+    <input type="number" id="nb">
+    <button id="affiche">Afficher</button> 
+    <div id='tri' style="text-align : center"></div>
+    <script>
+        let affiche = document.querySelector("#affiche") ; 
+        affiche.addEventListener("click" , (e)=>{
+            let nb = document.querySelector("#nb").value.trim() ; 
+            if(parseInt(nb) > 0){
+                console.log(nb) ;
+                let  div = document.querySelector("#tri") ; 
+                div.innerHTML = "" ; 
+                let l ; 
+                for(let i = 1 ; i <= nb ; i++){
+                console.log("in FOR ") ;
+                    let div2 = document.createElement("div") ;
+                    if(i == 1){
+                        div2.innerHTML  = `<img src='../images/img1.jpeg' style='display:inline ; border-radius:50% ; width:80px'>` ; 
+                        l = 1 ; 
+                    }else{
+                        l += 2 ; 
+                        for(let j = 1 ; j <= l ; j++){
+                            div2.innerHTML  += `<img src='../images/img1.jpeg' style='display:inline ; border-radius:50% ; width:80px'>` ;
+                        }
+                    }
+                        div.prepend(div2) ; 
+                }
+            }
+        }) 
+
+    </script>   
+</body>
+</html>

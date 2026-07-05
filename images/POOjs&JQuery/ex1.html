@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Achat Livres</h1>
+    <h2>Choisir votre livre : </h2>
+    <select  id="liste">
+        <option value=""></option>
+    </select>
+    <h2 id="isbn"></h2>
+    <table id="info" border>
+        <tbody id="tbody1">
+
+        </tbody>
+    </table>
+    <button onclick="ajouter()">Ajouter au panier</button>
+    <button onclick="retirer()">Retirer au panier</button>
+    <table border >
+        <tbody id="tbody2" >
+
+        </tbody>
+    </table>
+    <h1 id="total"> </h1>
+    <script>
+    let tab = [{"ISBN":"01234","titre":"Langage C","image":"img1.jpeg","prix":150},
+                {"ISBN":"56789","titre":"Programmation Javascript","image":"img2.jpeg","prix":250},
+                {"ISBN":"11778","titre":"Laravel","image":"img3.jpeg","prix":200}
+                ]
+    let list = document.getElementById("liste") ;
+    let parent = document.querySelector("body") ; 
+    let panier = [] ;
+    let pay = 0 ;
+    function charger(tab){
+        for(let t of tab){
+            let op = document.createElement("option") ; 
+            op.setAttribute("value" , `${t.ISBN}`)
+            op.innerText = t.titre ; 
+            list.append(op) ; 
+        }
+    }
+        list.addEventListener("click" , () =>{
+            let att = list.value ; 
+            for(let t of tab){
+                if(t.ISBN === att){
+                    isbn.innerText = "" ; 
+                    isbn.innerText = `Livre ${t.ISBN}` ;
+                    tbody1.innerHTML = `<tr><td>Titre</td><td>${t.titre}</td></tr>
+                                <tr><td>Prix</td><td>${t.prix}</td></tr>
+                                <tr><td>Image</td><td><img src='../${t.image}' width='50px'></td></tr>`
+                }
+            }
+        })
+
+        function ajouter(){
+            total.innerText = "" ;
+            let comp = 0 ; 
+             let att = list.value ; 
+            for(let t of tab){
+                if(t.ISBN === att){
+                    for(let p of panier){
+                        if( p.ISBN === att){
+                            p.quantite += 1 ;
+                            break ;  
+                        }else{
+                            comp += 1 ; 
+                        }
+                    }
+                    if(panier.length == comp){
+                            t.quantite = 1 ;   
+                            panier.push(t) ;
+                    }
+                }
+            }
+           tbody2.innerHTML = `<tr><td>Titre</td><td>Prix</td><td>quantité</td></tr>` ;
+           pay = 0 ; 
+           for(let p of panier){
+                
+                tbody2.innerHTML += `<tr><td>${p.titre}</td><td>${p.prix}</td><td>${p.quantite}</td></tr>` ;
+               pay  +=  p.prix * p.quantite
+            }
+            total.innerText += pay
+        }
+
+
+
+        function retirer(){
+                 total.innerText = "" ;
+             let att = list.value ; 
+            for(let t of tab){
+                if(t.ISBN === att){
+                    for(let p of panier){
+                        if( p.ISBN === att){
+                            p.quantite -= 1 ; 
+                        
+                        if(p.quantite == 0){
+                             ;   
+                            panier.splice(panier.indexOf(t), 1) ;
+                    }}
+                    }
+                    
+                }
+            }
+           tbody2.innerHTML = `<tr><td>Titre</td><td>Prix</td><td>quantité</td></tr>` ;
+           pay = 0 ; 
+           for(let p of panier){
+                
+                tbody2.innerHTML += `<tr><td>${p.titre}</td><td>${p.prix}</td><td>${p.quantite}</td></tr>` ;
+               pay  +=  p.prix * p.quantite
+            }
+            total.innerText += pay
+        }
+    charger(tab) ;
+    </script>
+</body>
+</html>

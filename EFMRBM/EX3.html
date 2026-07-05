@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        function getDataImage(){
+            let images = [] ; 
+            for(let i = 1 ; i <= 9 ; i++){
+                images.push("img" + i + ".jpeg") ;
+            }
+            images.sort(()=>Math.random() - 0.5)
+            console.log(images)   ; 
+            let d2 = [] ; 
+            let compt = 0 ; 
+            for(let i = 0 ; i < 3 ; i++){
+                d2.push([images[compt] , images[compt+1] , images[compt+2] ]) ; 
+                compt += 3 ;
+            }
+            console.log(d2) ; 
+            for(let i = 0 ; i < 3 ; i++){
+                for(let j = 0 ; j < 3 ; j++){
+                    if(d2[i][j] == "img9.jpeg"){
+                        d2[i][j] = "" ; 
+                    }
+                }
+            }
+            return d2 ; 
+        }
+        getDataImage()
+function create(data) {
+    let oldTable = document.querySelector("table");
+    if (oldTable) oldTable.remove();
+
+    let table = document.createElement("table");
+    
+    for (let i = 0; i < 3; i++) {
+        let tr = document.createElement("tr");
+        
+        for (let j = 0; j < 3; j++) {
+            let td = document.createElement("td");
+            
+            if (data[i][j] !== "") {
+                let img = document.createElement("img");
+                img.src = data[i][j];
+                img.style.width = "100px";
+                td.appendChild(img);
+            }
+
+            td.onclick = function() {
+                let rowEmpty, colEmpty;
+                for (let x = 0; x < 3; x++) {
+                    for (let y = 0; y < 3; y++) {
+                        if (data[x][y] === "") {
+                            rowEmpty = x;
+                            colEmpty = y;
+                        }
+                    }
+                }
+                
+                let diffRow = Math.abs(i - rowEmpty);
+                let diffCol = Math.abs(j - colEmpty);
+                
+                if (diffRow + diffCol === 1) {
+                    data[rowEmpty][colEmpty] = data[i][j];
+                    data[i][j] = "";
+                    create(data);
+                    END(data);
+                }
+            };  
+            tr.appendChild(td);
+        }
+        table.appendChild(tr);
+    }
+    document.body.appendChild(table);
+}
+function END(data) {
+    let target = [
+        ["im1.png", "im2.png", "im3.png"],
+        ["im4.png", "im5.png", "im6.png"],
+        ["im7.png", "im8.png", ""]
+    ];
+    let isSorted = true; 
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if (data[i][j] !== target[i][j]) {
+                isSorted = false; 
+                break; 
+            }
+        }
+    }
+    if (isSorted) {
+        alert("Partie Terminée");
+    }
+}
+let myData = getDataImage();
+create(myData);
+    </script>
+</body>
+</html>

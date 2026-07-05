@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+        <label for="">CIN:</label><span id="s1">*</span>
+        <input type="text" id="cin" placeholder="Taper le CIN" >
+        <label for="">Prenom:</label><span id="s2">*</span>
+        <input type="text" id="prenom" placeholder="Taper le prenom" >
+        <label for="">Telephone:</label><span id="s3">*</span>
+        <input type="text" id="tele" placeholder="Taper le telephone" >
+        <label for="">Date d'embauche:</label><span id="s4">*</span>
+        <input type="text" id="date" placeholder="Taper la Date d'embauche" >
+        <button id="valider">Valider</button>
+    
+    <script>
+        function valider(){
+            let cin = document.querySelector("#cin") ; 
+            let prenom = document.querySelector("#prenom") ; 
+            let tele = document.querySelector("#tele") ; 
+            let date = document.querySelector("#date") ; 
+            let regcin = /^[A-Za-z]{1,2}[0-9]{5,9}$/ ; 
+            let regprenom = /^[A-Z]{1}[a-z]{2,}$/    ;
+            let regtele = /^0(6|7)[0-9]{8}$/         ;
+            let regdate = /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/ ;
+            if(cin.value.trim() == ""){
+                s1.style.color = "red" ; 
+                return false ; 
+
+            }
+            if(prenom.value.trim() == ""){
+                s2.style.color = "red" ; 
+                return false ; 
+
+            }
+            if(tele.value.trim() == ""){
+                s3.style.color = "red" ; 
+                return false ; 
+
+            }
+            if(date.value.trim() == ""){
+                s4.style.color = "red" ; 
+                return false ; 
+
+            }
+            if(regcin.test(cin.value.trim()) &&  regprenom.test(prenom.value.trim()) && regtele.test(tele.value.trim()) && regdate.test(date.value.trim())){
+                return true ; 
+            }
+
+        }
+
+        let valid = document.querySelector("#valider") ; 
+        valid.addEventListener("click" , valider) ; 
+    </script>
+</body>
+</html>
